@@ -9,3 +9,7 @@ product_slug: elastic-runtime
 # This can be found in the .pivotal file's manifest for the product.
 # `unzip -p p-rabbitmq-1.7.8.pivotal "metadata/*.yml" | head`
 product_name: cf
+
+# The specific globs regular expression for the product file
+# If ommitted, "*pivotal" will be used by the framework by default.
+globs: "cf*pivotal"
