@@ -18,16 +18,7 @@ function setTilesUpgradePipelines() {
     tileMetadataFilename="./common/pcf-tiles/$tile_name.yml"
     resource_name=$(grep "resource_name" $tileMetadataFilename | cut -d ":" -f 2 | tr -d " ")
 
-    tile_globs=$(grep "globs" $tileMetadataFilename | cut -d ":" -f 2 | tr -d " ")
-    [ -z "${tile_globs}" ] && tile_globs="\"*pivotal\""
-
-    # update globs param for the tile resource
-    cp ./operations/opsfiles/tile-globs-update.yml ./tile-globs-update-tmp.yml
-    sed -i "s/GLOBS/$tile_globs/g" ./tile-globs-update-tmp.yml
-    # Pipeline template file ./upgrade-tile-template.yml is produced by processPipelinePatchesPerFoundation() in ./operations/operations.sh
-    cat ./upgrade-tile-template.yml | yaml_patch_linux -o ./tile-globs-update-tmp.yml > ./upgrade-tile-with-globs.yml
-
-    cp ./upgrade-tile-with-globs.yml ./upgrade-tile.yml
+    cp ./upgrade-tile-template.yml ./upgrade-tile.yml
     # update when tile template contains variables to be replaced with sed, e.g. releases in S3 bucket
     sed -i "s/RESOURCENAME/$resource_name/g" ./upgrade-tile.yml
     sed -i "s/PRODUCTVERSION/$tileEntryValue/g" ./upgrade-tile.yml

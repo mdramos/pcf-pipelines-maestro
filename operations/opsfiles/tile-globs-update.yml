@@ -1,4 +1,0 @@
----
-- op: replace
-  path: /jobs/get=pivnet-product/params/globs
-  value: [GLOBS]

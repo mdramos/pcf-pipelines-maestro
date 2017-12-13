@@ -12,10 +12,11 @@
 # Uncomment the items that upgrade pipelines should be created for, then push it
 # to git and re-run the Maestro main pipeline for pipelines to be updated/created.
 # ********************* Ops Manager upgrade *****
-BoM_OpsManager_product_version: ^1\.11\..*$
+BoM_OpsManager_product_version: ^1\.12\..*$
 # ********************* PCF tiles upgrade *****
-BoM_tile_ERT_product_version: ^1\.11\..*$
-# BoM_tile_IsolationSegment_product_version: ^1\.11\..*$
+BoM_tile_ERT_product_version: ^1\.12\..*$
+# BoM_tile_SRT_product_version: ^1\.12\..*$
+# BoM_tile_IsolationSegment_product_version: ^1\.12\..*$
 # BoM_tile_MySQL_product_version: ^1\.9\..*$
 # BoM_tile_RabbitMQ_product_version: ^1\.7\..*$
 # BoM_tile_Redis_product_version: ^1\.7\..*$
@@ -139,6 +140,8 @@ ntp: ((ntp))                                      # NTP for the Ops Manager. e.g
 opsman_network: ((opsman_network))                # Network for the Ops Manager. e.g. "VM Network"
 opsman_disk_type: thin                            # use thick or thin disk provisioning. Required only for pcf-pipelines 0.17.0+
 opsman_timeout_seconds: 3600                      # Ops Manager timeout in seconds. e.g. 1800
+vcenter_ca_cert:
+vcenter_insecure: true
 
 # *********** Credentials for Concourse Team ***********
 # admin user ID for the Concourse team to be created for the foundation. e.g. admin

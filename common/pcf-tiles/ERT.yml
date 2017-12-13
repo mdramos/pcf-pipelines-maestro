@@ -10,6 +10,5 @@ product_slug: elastic-runtime
 # `unzip -p p-rabbitmq-1.7.8.pivotal "metadata/*.yml" | head`
 product_name: cf
 
-# The specific globs regular expression for the product file
-# If ommitted, "*pivotal" will be used by the framework by default.
-globs: "cf*pivotal"
+# The globs regular expression for the PivNet resource to download the product
+product_globs: "cf*pivotal"

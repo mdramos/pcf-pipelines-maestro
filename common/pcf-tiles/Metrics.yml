@@ -9,3 +9,6 @@ product_slug: pcf-metrics
 # This can be found in the .pivotal file's manifest for the product.
 # `unzip -p p-rabbitmq-1.7.8.pivotal "metadata/*.yml" | head`
 product_name: apm
+
+# The globs regular expression for the PivNet resource to download the product
+product_globs: "*pivotal"
