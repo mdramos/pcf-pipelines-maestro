@@ -93,6 +93,11 @@ opsman_admin_password: ((opsman_admin_password))
 opsman_passphrase: ((opsman_passphrase))
 # ops manager ssh password (ubuntu user ssh password)
 opsman_ssh_password: ((opsman_ssh_password))
+# Either opsman_client_id/opsman_client_secret or opsman_admin_username/opsman_admin_password needs to be specified
+# opsman_client_id - to authenticate with Ops Manager if it is configured to use SAML
+opsman_client_id: ((opsman_client_id))
+# opsman_client_secret - to authenticate with Ops Manager if it is configured to use SAML
+opsman_client_secret: ((opsman_client_secret))
 # Interval to check on new releases from Pivotal Network. eg. 2h, 3h45m, 3000s
 check_new_opsman_every: 1h
 # The interval to check Pivotal Network for updates to the product file.
