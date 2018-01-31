@@ -3,7 +3,7 @@ resource_name: metrics
 
 # The name of the product on Pivotal Network.
 # This can be found in the URL of the product page,
-product_slug: pcf-metrics
+product_slug: apm
 
 # The name of the product file found in the metadata file for the product.
 # This can be found in the .pivotal file's manifest for the product.
