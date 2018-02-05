@@ -12,19 +12,20 @@
 # Uncomment the items that upgrade pipelines should be created for, then push it
 # to git and re-run the Maestro main pipeline for pipelines to be updated/created.
 # ********************* Ops Manager upgrade *****
-BoM_OpsManager_product_version: ^1\.12\..*$
+BoM_OpsManager_product_version: ^2\.0\..*$
 # ********************* PCF tiles upgrade *****
-BoM_tile_ERT_product_version: ^1\.12\..*$
-# BoM_tile_SRT_product_version: ^1\.12\..*$
-# BoM_tile_IsolationSegment_product_version: ^1\.12\..*$
-# BoM_tile_MySQL_product_version: ^1\.9\..*$
-# BoM_tile_RabbitMQ_product_version: ^1\.7\..*$
-# BoM_tile_Redis_product_version: ^1\.7\..*$
-# BoM_tile_Metrics_product_version: ^1\.3\..*$
+BoM_tile_ERT_product_version: ^2\.0\..*$
+# BoM_tile_SRT_product_version: ^2\.0\..*$
+# BoM_tile_IsolationSegment_product_version: ^2\.0\..*$
+# BoM_tile_PKS_product_version: ^1\.0\..*$
+# BoM_tile_MySQL_product_version: ^1\.10\..*$
+# BoM_tile_RabbitMQ_product_version: ^1\.11\..*$
+# BoM_tile_Redis_product_version: ^1\.10\..*$
+# BoM_tile_Metrics_product_version: ^1\.4\..*$
 # BoM_tile_SSO_product_version: ^1\.3\..*$
 # BoM_tile_JMXBridge_product_version: ^1\.8\..*$
 # BoM_tile_NewRelic_product_version: ^1\.9\..*$
-# BoM_tile_SCS_product_version: ^1\.3\..*$
+# BoM_tile_SCS_product_version: ^1\.5\..*$
 # BoM_tile_SplunkNozzle_product_version: ^0\.2\..*$
 # ********************* Buildpack upgrades - Candidate and Current Buildpack Versions ****
 # BoM_bp_go_buildpack_candidate: Go 1.8.1

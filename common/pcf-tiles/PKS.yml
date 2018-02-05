@@ -1,0 +1,14 @@
+# The name of the resource to be displayed in the pipeline, e.g. 'rabbitmq'
+resource_name: pks
+
+# The name of the product on Pivotal Network.
+# This can be found in the URL of the product page,
+product_slug: pivotal-container-service
+
+# The name of the product file found in the metadata file for the product.
+# This can be found in the .pivotal file's manifest for the product.
+# `unzip -p p-rabbitmq-1.7.8.pivotal "metadata/*.yml" | head`
+product_name: pivotal-container-service
+
+# The globs regular expression for the PivNet resource to download the product
+product_globs: "*pivotal"
