@@ -88,6 +88,9 @@ createPivNetToS3Pipeline() {
 
   templateFoundationFile=$(grep "template-foundation-config-file" "$configurationsFile" | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
   concourseMasterTeam=$(grep "concourse_master_team" "$configurationsFile" | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
+  if [ -z "${concourseMasterTeam}" ]; then
+    concourseMasterTeam="main"
+  fi
 
   if [ -z "${templateFoundationFile}" ]; then
     echo "Error creating the PivNet-to-S3 pipeline. Parameter 'template-foundation-config-file' is missing from /common/credentials.yml"

@@ -11,6 +11,9 @@ function parseConcourseCredentials() {
     export cc_main_pass=$(grep "concourse_main_pass" $params_file | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
     export skip_ssl_verification=$(grep "concourse_skip_ssl_verification" $params_file | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
     export cc_master_team=$(grep "concourse_master_team" "$params_file" | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
+    if [ -z "${cc_master_team}" ]; then
+      cc_master_team="main"
+    fi
 
   fi
 }

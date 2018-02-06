@@ -21,6 +21,9 @@ export cc_url=$MAIN_CONCOURSE_URL
 export cc_main_user=$MAIN_CONCOURSE_USERNAME
 export cc_main_pass=$MAIN_CONCOURSE_PASSWORD
 export skip_ssl_verification=$MAIN_CONCOURSE_SKIP_SSL
+if [ -z "${MAIN_CONCOURSE_MASTER_TEAM}" ]; then
+  MAIN_CONCOURSE_MASTER_TEAM="main"
+fi
 export cc_master_team=$MAIN_CONCOURSE_MASTER_TEAM
 
 # prepare Concourse FLY cli in the task container (see ./tasks/maestro/scripts/tools.sh)
