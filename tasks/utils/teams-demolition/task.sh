@@ -15,7 +15,7 @@ export cc_main_user=""
 export cc_main_pass=""
 export cc_user=""
 export cc_pass=""
-
+export cc_master_team=
 
 for foundation in ./foundations/*.yml; do
 
@@ -24,13 +24,13 @@ for foundation in ./foundations/*.yml; do
     foundation_name="${foundation_fullname%.*}"
     echo "Processing team deletion for foundation [$foundation_name]"
 
-    parseConcourseCredentials "./common/credentials.yml" "true" 
+    parseConcourseCredentials "./common/credentials.yml" "true"
 
     prepareTools "$cc_url" "$previous_concourse_url"
 
     previous_concourse_url=$cc_url
 
-    loginConcourseTeam "$cc_url" "$cc_main_user" "$cc_main_pass" "main"
+    loginConcourseTeam "$cc_url" "$cc_main_user" "$cc_main_pass" "$cc_master_team"
 
     echo "Processing deletion of team $foundation_name"
     set +e

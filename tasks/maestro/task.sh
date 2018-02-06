@@ -21,11 +21,12 @@ export cc_url=$MAIN_CONCOURSE_URL
 export cc_main_user=$MAIN_CONCOURSE_USERNAME
 export cc_main_pass=$MAIN_CONCOURSE_PASSWORD
 export skip_ssl_verification=$MAIN_CONCOURSE_SKIP_SSL
+export cc_master_team=$MAIN_CONCOURSE_MASTER_TEAM
 
 # prepare Concourse FLY cli in the task container (see ./tasks/maestro/scripts/tools.sh)
 prepareTools "$cc_url"
 
-loginConcourseTeam "$cc_url" "$cc_main_user" "$cc_main_pass" "main" "$skip_ssl_verification"
+loginConcourseTeam "$cc_url" "$cc_main_user" "$cc_main_pass" "$cc_master_team" "$skip_ssl_verification"
 
 # Process pipelines YAML patches that will apply to all foundations
 # See function definition in ./operations/operations.sh
@@ -44,16 +45,16 @@ for foundation in ./foundations/*.yml; do
     # parseConcourseCredentials "$foundation" "false"
     # parseConcourseFoundationCredentials "$foundation"
 
-    concourseFlySync "$cc_url" "$previous_concourse_url" "main"
+    concourseFlySync "$cc_url" "$previous_concourse_url" "$cc_master_team"
     previous_concourse_url=$cc_url     # save current concourse url
 
     # login into Concourse main team (see ./tasks/maestro/scripts/concourse.sh)
-    # loginConcourseTeam "$cc_url" "$cc_main_user" "$cc_main_pass" "main" "$skip_ssl_verification"
+    # loginConcourseTeam "$cc_url" "$cc_main_user" "$cc_main_pass" master "$skip_ssl_verification"
 
 
     # create concourse team for the foundation if not existing yet (see ./tasks/maestro/scripts/concourse.sh)
-    # createConcourseFoundationTeam "$foundation_name" "$cc_user" "$cc_pass" "main"
-    createConcourseFoundationTeam "$foundation_name" "$MAIN_CONCOURSE_USERNAME" "$MAIN_CONCOURSE_PASSWORD" "main"
+    # createConcourseFoundationTeam "$foundation_name" "$cc_user" "$cc_pass" "$cc_master_team"
+    createConcourseFoundationTeam "$foundation_name" "$MAIN_CONCOURSE_USERNAME" "$MAIN_CONCOURSE_PASSWORD" "$cc_master_team"
 
 
     # Login into the corresponding Concourse team for the foundation (see ./tasks/maestro/scripts/concourse.sh)

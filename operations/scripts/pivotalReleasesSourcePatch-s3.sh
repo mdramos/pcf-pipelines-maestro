@@ -90,6 +90,8 @@ createPivNetToS3Pipeline() {
   configurationsFile="${1}"
 
   templateFoundationFile=$(grep "template-foundation-config-file" "$configurationsFile" | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
+  concourseMasterTeam=$(grep "concourse_master_team" "$configurationsFile" | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
+
   if [ -z "${templateFoundationFile}" ]; then
     echo "Error creating the PivNet-to-S3 pipeline. Parameter 'template-foundation-config-file' is missing from /common/credentials.yml"
     exit 1
@@ -155,7 +157,7 @@ createPivNetToS3Pipeline() {
       # if at least one tile was found, then generate Pivnet-to-S3 pipeline
       if [ -e "./pivnet-to-s3-bucket-entry.yml" ]; then
           echo "Setting Pivnet-to-S3 pipeline."
-          ./fly -t "main" set-pipeline -p "pivnet-to-s3-bucket" -c ./pivnet-to-s3-bucket.yml -l "$configurationsFile" -l "$templateFoundationFilePath" -n
+          ./fly -t "$concourseMasterTeam" set-pipeline -p "pivnet-to-s3-bucket" -c ./pivnet-to-s3-bucket.yml -l "$configurationsFile" -l "$templateFoundationFilePath" -n
       else
           echo "Skipping creation of Pivnet-to-S3 pipeline, no tile configuration found for foundation [$templateFoundationFile]."
       fi

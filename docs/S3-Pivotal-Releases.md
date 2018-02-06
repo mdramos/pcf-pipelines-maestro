@@ -4,7 +4,7 @@
 
 Maestro provides a customization option to adapt *pcf-pipelines* to retrieve Pivotal releases from an S3-compatible repository (e.g. [AWS S3](https://aws.amazon.com/s3/), [Minio](https://www.minio.io/)).
 
-When that customization rule is applied, all upgrade pipelines will monitor and retrieve Pivotal product release files from the configured S3-compatible repository. Also, a pipeline will be created in the "main" Concourse team to automatically download releases from Pivotal Network and then upload them to the S3 repository.
+When that customization rule is applied, all upgrade pipelines will monitor and retrieve Pivotal product release files from the configured S3-compatible repository. Also, a pipeline will be created in the master Concourse team to automatically download releases from Pivotal Network and then upload them to the S3 repository.
 
 ---
 ### Customized upgrade pipelines
@@ -28,7 +28,7 @@ The S3 resource will expect a specific structure of folders and release file nam
                 ...
 ```
 
-In order to automatically populate the S3 repository with the appropriate folder and file structure, a **PivNet-to-S3-bucket** pipeline is automatically created in the "main" Concourse team. It is recommended to use such pipeline to upload the Pivotal releases to S3.
+In order to automatically populate the S3 repository with the appropriate folder and file structure, a **PivNet-to-S3-bucket** pipeline is automatically created in the master Concourse team. It is recommended to use such pipeline to upload the Pivotal releases to S3.
 
 ---
 ### The PivNet-to-S3-bucket pipeline
