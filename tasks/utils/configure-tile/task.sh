@@ -36,19 +36,19 @@ saml_key_pem=`echo $saml_certificates | jq --raw-output '.key'`
 
 
 # NETWORK
-cat $TILE_NETWORK > ./network_object.yml
+echo "$TILE_NETWORK" > ./network_object.yml
 # convert network YML into JSON
 python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)' < ./network_object.yml > ./network_object.json
 export network_object=$(cat network_object.json)
 
 # RESOURCES
-cat $TILE_RESOURCES > ./resources_object.yml
+echo "$TILE_RESOURCES" > ./resources_object.yml
 # convert resources YML into JSON
 python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)' < ./resources_object.yml > ./resources_object.json
 export resources_object=$(cat resources_object.json)
 
 # PROPERTIES
-cat $TILE_PROPERTIES > ./properties_object.yml
+echo "$TILE_PROPERTIES" > ./properties_object.yml
 # convert properties YML into JSON
 python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)' < ./properties_object.yml > ./properties_object.json
 
