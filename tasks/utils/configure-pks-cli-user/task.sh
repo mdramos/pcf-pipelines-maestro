@@ -2,8 +2,8 @@
 set -eu
 
 echo "Note - pre-requisite for this task to work:"
-echo "- Your PKS API endpoint [api.$PKS_DOMAIN] should have be routable and accessible from the Concourse network."
-echo "- See PKS tile documentation for required configuration for vSphere [https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-vsphere.html#loadbalancer-pks-api] and GCP [https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-gcp.html#loadbalancer-pks-api]"
+echo "- Your PKS API endpoint [api.$PKS_DOMAIN] should be routable and accessible from the Concourse worker(s) network."
+echo "- See PKS tile documentation for configuration details for vSphere [https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-vsphere.html#loadbalancer-pks-api] and GCP [https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-gcp.html#loadbalancer-pks-api]"
 
 echo "Retrieving PKS tile properties from Ops Manager [https://$OPSMAN_DOMAIN_OR_IP_ADDRESS]..."
 # get PKS UAA admin credentails from OpsMgr
@@ -13,7 +13,7 @@ UAA_ADMIN_SECRET=$(om-linux --target "https://$OPSMAN_DOMAIN_OR_IP_ADDRESS" --cl
 
 echo "Connecting to PKS UAA server [api.<$PKS_DOMAIN>]..."
 # login to PKS UAA
-uaac target api.$PKS_DOMAIN --skip-ssl-validation
+uaac target https://api.$PKS_DOMAIN:8443 --skip-ssl-validation
 uaac token client get admin --secret $UAA_ADMIN_SECRET
 
 echo "Creating PKS CLI administrator user per PK tile documentation https://docs.pivotal.io/runtimes/pks/1-0/manage-users.html#uaa-scopes"

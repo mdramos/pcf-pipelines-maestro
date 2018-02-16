@@ -1,0 +1,218 @@
+######## Generic parameters
+product_name: pivotal-container-service  # do not change
+
+pks_major_minor_version: ^1\.0\..*$  # PKS tile version to install
+opsman_domain_or_ip_address: ((opsman_domain_or_ip_address))
+opsman_admin_username: ((opsman_admin_username))      # Username for Ops Manager admin account
+opsman_admin_password: ((opsman_admin_password))       # Password for Ops Manager admin account
+# domain for certificate generation when applicable
+pcf_pks_domain: ((pcf_pks_domain)) # e.g. pks.mydomain.com
+pks_cli_username: ((pks_cli_username))  # username to be created in PKS UAA
+pks_cli_useremail: pksadmin@example.com # email address for PKS user to be created
+pks_cli_password: ((pks_cli_password))  # password for PKS user to be created
+
+######## AZs and Networks
+networks: |
+  network:
+    name: SERVICES
+  other_availability_zones:
+  - name: AZ01
+  - name: AZ02
+  - name: AZ03
+  service_network:
+    name: DYNAMIC-SERVICES
+  singleton_availability_zone:
+    name: AZ01
+
+
+properties: |
+
+  ######## Certificate to secure the PKS API
+  .pivotal-container-service.pks_tls:
+    value:
+      cert_pem:
+      private_key_pem:
+
+  ######## Configuration for Plan 1
+  .properties.plan1_selector:
+    value: "Plan Active"
+  .properties.plan1_selector.active.name:
+    value: "Small plan"  # the name that appears for end users to choose
+  .properties.plan1_selector.active.description:
+    value: "Plan 1 description"
+  .properties.plan1_selector.active.az_placement:
+    value: AZ01  # Specify the AZ in which the cluster will be created
+  .properties.plan1_selector.active.authorization_mode:
+    value: rbac    # rbac or abac - Default Cluster Authorization Mode
+  .properties.plan1_selector.active.master_vm_type:
+    value: medium
+  .properties.plan1_selector.active.master_persistent_disk_type:
+    value: "10240"
+  .properties.plan1_selector.active.worker_vm_type:
+    value: medium
+  .properties.plan1_selector.active.persistent_disk_type:
+    value: "10240"
+  .properties.plan1_selector.active.worker_instances:
+    value: 3    # The number of K8s worker instances
+  .properties.plan1_selector.active.errand_vm_type:
+    value: micro
+  .properties.plan1_selector.active.addons_spec:
+    value: "" # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
+  .properties.plan1_selector.active.allow_privileged_containers:
+    value: false  # Privileged containers run with host-like permissions. Allowing your users to deploy privileged containers in clusters using this plan can create security vulnerabilities and may impact other tiles. Use with caution.
+
+
+  ######## Configuration for Plan 2 - "Plan Inactive" or "Plan Active"
+  .properties.plan2_selector:
+    value: "Plan Inactive"
+  ### if plan 2 is activated, then uncomment and fill out the plan2 parameters below
+  # .properties.plan2_selector.active.name:
+  #   value: "Medium plan"  # the name that appears for end users to choose
+  # .properties.plan2_selector.active.description:
+  #   value: "Plan 2 description"
+  # .properties.plan2_selector.active.az_placement:
+  #   value: AZ01  # Specify the AZ in which the cluster will be created
+  # .properties.plan2_selector.active.authorization_mode:
+  #   value: rbac    # rbac or abac - Default Cluster Authorization Mode
+  # .properties.plan2_selector.active.master_vm_type:
+  #   value: large
+  # .properties.plan2_selector.active.master_persistent_disk_type:
+  #   value: "10240"
+  # .properties.plan2_selector.active.worker_vm_type:
+  #   value: medium
+  # .properties.plan2_selector.active.persistent_disk_type:
+  #   value: "10240"
+  # .properties.plan2_selector.active.worker_instances:
+  #   value: 5    # The number of K8s worker instances
+  # .properties.plan2_selector.active.errand_vm_type:
+  #   value: micro
+  # .properties.plan2_selector.active.addons_spec:
+  #   value: "" # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
+  # .properties.plan2_selector.active.allow_privileged_containers:
+  #   value: false  # Privileged containers run with host-like permissions. Allowing your users to deploy privileged containers in clusters using this plan can create security vulnerabilities and may impact other tiles. Use with caution.
+
+
+  ######## Configuration for Plan 3 - "Plan Inactive" or "Plan Active"
+  .properties.plan3_selector:
+    value: "Plan Inactive"
+  ### if plan 3 is activated, then uncomment and fill out the plan3 parameters below
+  # .properties.plan3_selector.active.name:
+  #   value: "Large plan"  # the name that appears for end users to choose
+  # .properties.plan3_selector.active.description:
+  #   value: "Plan 3 description"
+  # .properties.plan3_selector.active.az_placement:
+  #   value: AZ01  # Specify the AZ in which the cluster will be created
+  # .properties.plan3_selector.active.authorization_mode:
+  #   value: rbac    # rbac or abac - Default Cluster Authorization Mode
+  # .properties.plan3_selector.active.master_vm_type:
+  #   value: large
+  # .properties.plan3_selector.active.master_persistent_disk_type:
+  #   value: "10240"
+  # .properties.plan3_selector.active.worker_vm_type:
+  #   value: large
+  # .properties.plan3_selector.active.persistent_disk_type:
+  #   value: "10240"
+  # .properties.plan3_selector.active.worker_instances:
+  #   value: 8    # The number of K8s worker instances
+  # .properties.plan3_selector.active.errand_vm_type:
+  #   value: micro
+  # .properties.plan3_selector.active.addons_spec:
+  #   value: "" # Kubernetes yml that contains specifications of addons to run on every cluster. This is an experimental feature. Please consider carefully before applying this to your plan
+  # .properties.plan3_selector.active.allow_privileged_containers:
+  #   value: false  # Privileged containers run with host-like permissions. Allowing your users to deploy privileged containers in clusters using this plan can create security vulnerabilities and may impact other tiles. Use with caution.
+
+
+  ######## Kubernetes cloud provider: GCP or vSphere
+  .properties.cloud_provider:
+    value: vSphere
+
+  ### if GCP is selected, then uncomment and fill out the GCP parameters below
+  # .properties.cloud_provider.gcp.project_id:
+  #   value: gcp_project_id
+  # .properties.cloud_provider.gcp.network:
+  #   value: vpc_network  # Specify the VPC network name that will be used by the Kubernetes Cloud Provider
+  # .properties.cloud_provider.gcp.service_key:
+  #   value: gcp_service_key
+
+  ### if VSPHERE is selected, then uncomment and fill out the VSPHERE parameters below
+  .properties.cloud_provider.vsphere.vcenter_creds:
+    value:
+      identity: ((vcenter_usr)) # vcenter_admin_username
+      password: ((vcenter_pwd)) # vcenter_admin_password
+  .properties.cloud_provider.vsphere.vcenter_ip:
+    value: ((vcenter_host))
+  .properties.cloud_provider.vsphere.vcenter_dc:
+    value: ((vcenter_datacenter))
+  .properties.cloud_provider.vsphere.vcenter_ds:
+    value: ((vcenter_datastore))
+  .properties.cloud_provider.vsphere.vcenter_vms:
+    value: "pcf_vms" # The name should be the same as the VM Folder in the Ops Manager Director tile, under the vCenter config page.
+
+
+  ######## Network selector - flannel or nsx
+  .properties.network_selector:
+    value: flannel
+  # if nxt is used, then uncomment and fill out the nxt parameters below
+  # .properties.network_selector.nsx.nsx-t-host:
+  #   value: 10.10.10.10  # Please enter the NSX Manager hostname or IP address
+  # .properties.network_selector.nsx.credentials:
+  #   value:
+  #     identity: Username  # username to connect to the NSX Manager
+  #     password: mypassword  # password to connect to the NSX Manager
+  # .properties.network_selector.nsx.nsx-t-ca-cert:
+  #   value: |  # Optional custom CA certificate to be used to connect to NSX Manager
+  #     -----BEGIN CERTIFICATE-----
+  #     ...
+  #     -----END CERTIFICATE-----
+  # .properties.network_selector.nsx.vcenter_cluster:
+  #   value: mycluster   # Please enter the vSphere cluster name where PKS will be deployed
+  # .properties.network_selector.nsx.nsx-t-insecure:
+  #   value: false    # whether to disable SSL certificate verification when connecting to the NSX Manager
+  # .properties.network_selector.nsx.t0-router-id:
+  #   value: t0123456  # the UUID of the Tier-0 logical router configured in NSX manager
+  # .properties.network_selector.nsx.ip-block-id:
+  #   value: ip123456  # the UUID of the IP Block configured in NSX manager
+  # .properties.network_selector.nsx.floating-ip-pool-ids:
+  #   value: fip12345  # the UUID of the Floating IP Pool configured in NSX manager (for the current release only a single ID is supported)
+
+
+  ######## UAA configuration page
+  .properties.uaa_url:
+    value: api.((pcf_pks_domain))
+  .properties.uaa_pks_cli_access_token_lifetime:
+    value: 86400
+  .properties.uaa_pks_cli_refresh_token_lifetime:
+    value: 172800
+
+
+  ######## SYSLOG - disabled or enabled
+  .properties.syslog_migration_selector:
+    value: disabled
+  # if syslog is enabled, uncomment and fill out the syslog parameters below
+  # .properties.syslog_migration_selector.enabled.address:
+  #   value: 10.10.10.10  #The address or host for the syslog server
+  # .properties.syslog_migration_selector.enabled.port:
+  #   value: 0  # The port on which the syslog server listens
+  # .properties.syslog_migration_selector.enabled.transport_protocol:
+  #   value: tcp  # The transport protocol used to send syslog messages to the server
+  # .properties.syslog_migration_selector.enabled.tls_enabled:
+  #   value: true # Send logs encrypted to syslog server via TLS
+  # .properties.syslog_migration_selector.enabled.permitted_peer:
+  #   value: "*.example.com" # Either the accepted fingerprint (SHA1) or name of remote peer
+  # .properties.syslog_migration_selector.enabled.ca_cert:
+  #   value: |
+  #     -----BEGIN CERTIFICATE-----
+  #     ...
+  #     -----END CERTIFICATE-----
+
+######## Errands to disable
+errands_to_disable: ""
+  # pks-nsx-t-precheck,upgrade-all-service-instances,delete-all-clusters
+
+######## Resources
+resources: |
+  pivotal-container-service:
+    instance_type:
+      id: micro
+    persistent_disk:
+      size_mb: "10240"
