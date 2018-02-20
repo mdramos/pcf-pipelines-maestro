@@ -78,6 +78,16 @@ om-linux \
   --skip-ssl-validation \
   configure-product \
   --product-name "$TILE_PRODUCT_NAME" \
-  --product-network "$network_object" \
-  --product-resources "$resources_object" \
-  --product-properties "$final_properties_object"
+  --product-network "$network_object"
+
+  om-linux \
+    --target https://$OPSMAN_DOMAIN_OR_IP_ADDRESS \
+    --client-id "${OPSMAN_CLIENT_ID}" \
+    --client-secret "${OPSMAN_CLIENT_SECRET}" \
+    --username "$OPSMAN_USERNAME" \
+    --password "$OPSMAN_PASSWORD" \
+    --skip-ssl-validation \
+    configure-product \
+    --product-name "$TILE_PRODUCT_NAME" \
+    --product-resources "$resources_object" \
+    --product-properties "$final_properties_object"
