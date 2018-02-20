@@ -1,17 +1,32 @@
 ######## Generic parameters
 product_name: pivotal-container-service  # do not change
+product_version: ^1\.0\..*$  # PKS tile version to install
 
-pks_major_minor_version: ^1\.0\..*$  # PKS tile version to install
+# Note: see companion "pks_vault_params.sh" script for automated credentials
+#       creation for this pipeline in either Vault or CredHub.
+
+# Pivotal Network token for tile release download and pcf-pipelines download
+pivnet_token: ((pivnet_token))
+
+# Ops Manager information and admin credentials
 opsman_domain_or_ip_address: ((opsman_domain_or_ip_address))
 opsman_admin_username: ((opsman_admin_username))      # Username for Ops Manager admin account
 opsman_admin_password: ((opsman_admin_password))       # Password for Ops Manager admin account
-# domain for certificate generation when applicable
-pcf_pks_domain: ((pcf_pks_domain)) # e.g. pks.mydomain.com
-pks_cli_username: ((pks_cli_username))  # username to be created in PKS UAA
-pks_cli_useremail: pksadmin@example.com # email address for PKS user to be created
-pks_cli_password: ((pks_cli_password))  # password for PKS user to be created
+# Either opsman_client_id/opsman_client_secret or opsman_admin_username/opsman_admin_password needs to be specified.
+# If you are using opsman_admin_username/opsman_admin_password, edit opsman_client_id/opsman_client_secret to be an empty value.
+# If you are using opsman_client_id/opsman_client_secret, edit opsman_admin_username/opsman_admin_password to be an empty value.
+opsman_client_id: ((opsman_client_id))
+opsman_client_secret: ((opsman_client_secret))
 
-######## AZs and Networks
+# domain for PKS API certificate generation
+pcf_pks_domain: ((pcf_pks_domain)) # e.g. pks.mydomain.com
+
+# PKS CLI client ID to be created (if applicable) by post-deploy job "create-pks-cli-user"
+pks_cli_username: ((pks_cli_username))  # username to be created in PKS UAA
+pks_cli_password: ((pks_cli_password))  # password for PKS user to be created
+pks_cli_useremail: pksadmin@example.com # email address for PKS user to be created
+
+######## AZs and Networks configuration for the tile
 networks: |
   network:
     name: SERVICES
@@ -27,7 +42,7 @@ networks: |
 
 properties: |
 
-  ######## Certificate to secure the PKS API
+  ######## Certificate to secure the PKS API (automatically created and overridden by task in this version)
   .pivotal-container-service.pks_tls:
     value:
       cert_pem:
@@ -65,7 +80,8 @@ properties: |
   ######## Configuration for Plan 2 - "Plan Inactive" or "Plan Active"
   .properties.plan2_selector:
     value: "Plan Inactive"
-  ### if plan 2 is activated, then uncomment and fill out the plan2 parameters below
+  ### if plan 2 is to be activated, then uncomment and fill out the plan2 parameters below
+  ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.plan2_selector.active.name:
   #   value: "Medium plan"  # the name that appears for end users to choose
   # .properties.plan2_selector.active.description:
@@ -95,7 +111,8 @@ properties: |
   ######## Configuration for Plan 3 - "Plan Inactive" or "Plan Active"
   .properties.plan3_selector:
     value: "Plan Inactive"
-  ### if plan 3 is activated, then uncomment and fill out the plan3 parameters below
+  ### if plan 3 is to be activated, then uncomment and fill out the plan3 parameters below
+  ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.plan3_selector.active.name:
   #   value: "Large plan"  # the name that appears for end users to choose
   # .properties.plan3_selector.active.description:
@@ -126,15 +143,17 @@ properties: |
   .properties.cloud_provider:
     value: vSphere
 
-  ### if GCP is selected, then uncomment and fill out the GCP parameters below
+  ### if GCP is to be selected, then uncomment and fill out the GCP parameters below.
+  ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.cloud_provider.gcp.project_id:
-  #   value: gcp_project_id
+  #   value: ( ( gcp_project_id ) )
   # .properties.cloud_provider.gcp.network:
-  #   value: vpc_network  # Specify the VPC network name that will be used by the Kubernetes Cloud Provider
+  #   value: ( ( gcp_vpc_network ) )  # Specify the VPC network name that will be used by the Kubernetes Cloud Provider
   # .properties.cloud_provider.gcp.service_key:
-  #   value: gcp_service_key
+  #   value: ( ( gcp_service_key ) )
 
-  ### if VSPHERE is selected, then uncomment and fill out the VSPHERE parameters below
+  ### if VSPHERE is to be selected, then uncomment and fill out the VSPHERE parameters below
+  ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   .properties.cloud_provider.vsphere.vcenter_creds:
     value:
       identity: ((vcenter_usr)) # vcenter_admin_username
@@ -146,34 +165,35 @@ properties: |
   .properties.cloud_provider.vsphere.vcenter_ds:
     value: ((vcenter_datastore))
   .properties.cloud_provider.vsphere.vcenter_vms:
-    value: "pcf_vms" # The name should be the same as the VM Folder in the Ops Manager Director tile, under the vCenter config page.
+    value: ((vcenter_pcf_folder)) # The name should be the same as the VM Folder in the Ops Manager Director tile, under the vCenter config page.
 
 
   ######## Network selector - flannel or nsx
   .properties.network_selector:
     value: flannel
-  # if nxt is used, then uncomment and fill out the nxt parameters below
+  ### if NSX-T is to be used, then uncomment and fill out the nxt parameters below
+  ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.network_selector.nsx.nsx-t-host:
-  #   value: 10.10.10.10  # Please enter the NSX Manager hostname or IP address
+  #   value: ( ( nsxt_hostname_or_ipaddress ) )  # Please enter the NSX Manager hostname or IP address
   # .properties.network_selector.nsx.credentials:
   #   value:
-  #     identity: Username  # username to connect to the NSX Manager
-  #     password: mypassword  # password to connect to the NSX Manager
+  #     identity: ( ( nsxt_admin_username ) )  # username to connect to the NSX Manager
+  #     password: ( ( nsxt_admin_password ) )  # password to connect to the NSX Manager
   # .properties.network_selector.nsx.nsx-t-ca-cert:
   #   value: |  # Optional custom CA certificate to be used to connect to NSX Manager
   #     -----BEGIN CERTIFICATE-----
   #     ...
   #     -----END CERTIFICATE-----
   # .properties.network_selector.nsx.vcenter_cluster:
-  #   value: mycluster   # Please enter the vSphere cluster name where PKS will be deployed
+  #   value: ( ( nsxt_vcenter_cluster ) )   # Please enter the vSphere cluster name where PKS will be deployed
   # .properties.network_selector.nsx.nsx-t-insecure:
   #   value: false    # whether to disable SSL certificate verification when connecting to the NSX Manager
   # .properties.network_selector.nsx.t0-router-id:
-  #   value: t0123456  # the UUID of the Tier-0 logical router configured in NSX manager
+  #   value: ( ( nsxt_t0_routerid ) )  # the UUID of the Tier-0 logical router configured in NSX manager
   # .properties.network_selector.nsx.ip-block-id:
-  #   value: ip123456  # the UUID of the IP Block configured in NSX manager
+  #   value: ( ( nxst_ip_block_id ) )  # the UUID of the IP Block configured in NSX manager
   # .properties.network_selector.nsx.floating-ip-pool-ids:
-  #   value: fip12345  # the UUID of the Floating IP Pool configured in NSX manager (for the current release only a single ID is supported)
+  #   value: ( ( nsxt_floating_ip_pool_id ) )  # the UUID of the Floating IP Pool configured in NSX manager (for the current release only a single ID is supported)
 
 
   ######## UAA configuration page
@@ -188,7 +208,8 @@ properties: |
   ######## SYSLOG - disabled or enabled
   .properties.syslog_migration_selector:
     value: disabled
-  # if syslog is enabled, uncomment and fill out the syslog parameters below
+  ### if syslog is enabled, uncomment and fill out the syslog parameters below
+  ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.syslog_migration_selector.enabled.address:
   #   value: 10.10.10.10  #The address or host for the syslog server
   # .properties.syslog_migration_selector.enabled.port:
@@ -216,3 +237,7 @@ resources: |
       id: micro
     persistent_disk:
       size_mb: "10240"
+
+# pcf-pipelines legacy parameters - only used for when no_proxy option is used
+company_proxy_domain:
+om_ip:
