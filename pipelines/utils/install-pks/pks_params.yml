@@ -2,7 +2,7 @@
 product_name: pivotal-container-service  # do not change
 product_version: ^1\.0\..*$  # PKS tile version to install
 
-# Note: see companion "pks_vault_params.sh" script for automated credentials
+# Note: check companion "pks_vault_params.sh" script for automated credentials
 #       creation for this pipeline in either Vault or CredHub.
 
 # Pivotal Network token for tile release download and pcf-pipelines download
@@ -42,8 +42,22 @@ networks: |
 
 properties: |
 
-  ######## Certificate to secure the PKS API (automatically created and overridden by task in this version)
+  ######## Certificate to secure the PKS API
   .pivotal-container-service.pks_tls:
+    #
+    # The "generate_cert_domains" parameter controls the automatic certificates
+    #   generation behavior for this property.
+    #
+    # If auto-generation of certs is desired, leave this parameter un-commented
+    #   and update the array of domain names to be used for cert generation.
+    #   e.g. ["*.pks.mydomain.com","*.api.pks.mydomain.com"].
+    #   Leave parameters cert_pem and private_key_pem with empty values in this case.
+    #
+    # Otherwise, either comment out or delete this parameter line and
+    #   provide the certificate (cert_pem) and private key (private_key_pem) values
+    #   in the corresponding parameters further below.
+    #
+    generate_cert_domains: ["*.((pcf_pks_domain))","*.api.((pcf_pks_domain))"]
     value:
       cert_pem:
       private_key_pem:

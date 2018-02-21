@@ -151,7 +151,6 @@ jobs:
       TILE_NETWORK: {{networks}}
       TILE_RESOURCES: {{resources}}
       TILE_PRODUCT_NAME: {{product_name}}
-      CERT_DOMAIN: {{pcf_pks_domain}}
 
   - task: disable-errands
     file: pcf-pipelines/tasks/disable-errands/task.yml

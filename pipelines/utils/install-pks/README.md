@@ -26,10 +26,13 @@ This approach allows for the `configure-tile` task of this pipeline to be generi
 
 ## How to use this pipeline
 
-1) Update `pks_params.yml` by following the instructions in the file.  
+1) Update [`pks_params.yml`](pks_params.yml) by following the instructions in the file.  
    The order of tile parameters in that file follows the same order as parameters are presented in Ops Manager and in the tile documentation ([vSphere](https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-vsphere.html) or [GCP](https://docs.pivotal.io/runtimes/pks/1-0/installing-pks-gcp.html)).  
 
     If you use `Vault` or `CredHub` for credentials management, you can use the provided script [`pks_vault_params.sh`](pks_vault_params.sh) to automatically create the pipeline secrets in those systems.
+
+    Also, note that the pipeline can automatically generate certificates for the PKA API. See more details in comments for parameter  `.pivotal-container-service.pks_tls` in [`pks_params.yml`](pks_params.yml).  
+
 
 2) Create the pipeline in Concourse:  
 
@@ -37,8 +40,6 @@ This approach allows for the `configure-tile` task of this pipeline to be generi
 
 3) Un-pause and run pipeline `install-pks`
 
-
-*Note: for this first MVP, the pipeline only generates self-signed PKS certificate at all times. Work is in progress to make it configurable through an option in the params file. Stay tuned for updates.*
 
 ---
 
