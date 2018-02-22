@@ -31,14 +31,26 @@ This approach allows for the `configure-tile` task of this pipeline to be generi
 
     If you use `Vault` or `CredHub` for credentials management, you can use the provided script [`pks_vault_params.sh`](pks_vault_params.sh) to automatically create the pipeline secrets in those systems.
 
-    Also, note that the pipeline can automatically generate certificates for the PKA API. See more details in comments for parameter  `.pivotal-container-service.pks_tls` in [`pks_params.yml`](pks_params.yml).  
+    Also, note that the pipeline can automatically generate certificates for the PKS API. See more details in comments for parameter  `.pivotal-container-service.pks_tls` in [`pks_params.yml`](pks_params.yml).  
 
 
-2) Create the pipeline in Concourse:  
+2) Update [`pcf_params.yml`](pcf_params.yml) by following the instructions in the file.  
 
-   `fly -t <target> set-pipeline -p install-pks -c pipeline.yml -l pks_params.yml`
+   This parameter file contains information about the PCF foundation (e.g. Ops Manager and Director) to which the tile will be deployed to.  
 
-3) Un-pause and run pipeline `install-pks`
+   This parameters file is separate from the others for reuse purposes, since any other PCF tile install or upgrade pipeline will use the same properties. If you already have this type of file created for another PCF tile pipeline, you can reuse it here.
+
+3) Update [`global_params.yml`](global_params.yml) by following the instructions in the file.  
+
+  This parameter file contains information about global properties that typically apply to any PCF pipeline (e.g. Pivotal Network token).  
+
+  This parameters file is separate from the others for reuse purposes, since any other PCF tile install or upgrade pipeline will use the same properties. If you already have this type of file created for another PCF tile pipeline, you can reuse it here.
+
+4) Create the pipeline in Concourse:  
+
+   `fly -t <target> set-pipeline -p install-pks -c pipeline.yml -l global_params.yml -l pcf_params.yml -l pks_params.yml`
+
+5) Un-pause and run pipeline `install-pks`
 
 
 ---

@@ -11,12 +11,12 @@ opsman_client_secret:       # Client Secret for Ops Manager admin account
 # SSH password for Ops Manager (ssh user is ubuntu)
 opsman_ssh_password: ((opsman_ssh_password))
 # Decryption password for Ops Manager exported settings
-omd_decryption_pwd: ((om_decryption_pwd))
+om_decryption_pwd: ((om_decryption_pwd))
 # DNS servers
 om_dns_servers: ((om_dns_servers))
 # Gateway for Ops Manager network
 om_gateway: ((om_gateway))
-# IP to assign to Ops Manager VM
+# IP to assign to Ops Manager VM (for proxy env and for wipe-env job)
 om_ip: ((om_ip))
 # Netmask for Ops Manager network
 om_netmask: ((om_netmask))
@@ -37,14 +37,9 @@ om_vm_name: ((om_vm_name))
 om_vm_network: ((om_vm_network))
 # Whether to power on Ops Manager VM after creation
 om_vm_power_state: true
-company_proxy_domain:
+company_proxy_domain: ((company_proxy_domain))
 # Disk type for Ops Manager VM (thick|thin)
-opsman_disk_type:
-
-
-
-# Pivnet token for downloading resources from Pivnet. Find this token at https://network.pivotal.io/users/dashboard/edit-profile
-pivnet_token: ((pivnet_token))
+opsman_disk_type: ((opsman_disk_type))
 
 # Comma-separated list of NTP servers to use for VMs deployed by BOSH
 ntp_servers: ((ntp_servers))
@@ -62,8 +57,8 @@ vcenter_insecure: ((vcenter_insecure))  # true or false
 # Disk type for BOSH provisioned VM. (thick|thin)
 vm_disk_type: ((vm_disk_type))
 vcenter_ca_cert: ((vcenter_ca_cert))
-ephemeral_storage_names: a-xio, b-xio, c-xio  # Ephemeral Storage names in vCenter for use by PCF
-persistent_storage_names: a-xio, b-xio, c-xio # Persistent Storage names in vCenter for use by PCF
+ephemeral_storage_names: ((ephemeral_storage_names)) # Ephemeral Storage names in vCenter for use by PCF. e.g. a-xio, b-xio, c-xio
+persistent_storage_names: ((persistent_storage_names)) # Persistent Storage names in vCenter for use by PCF, e.g. a-xio, b-xio, c-xio
 
 # Optional PEM-encoded certificates to add to BOSH director
 trusted_certificates: ((trusted_certificates))
@@ -80,22 +75,22 @@ az_3_cluster_name: ((az_3_cluster_name))
 az_3_rp_name: ((az_3_rp_name))
 
 # vSphere datastore folder (such as pcf_disk) where attached disk images will be created
-bosh_disk_path: "pcf_disk"
+bosh_disk_path: ((bosh_disk_path))  # e.g. "pcf_disk"
 # vSphere datacenter folder (such as pcf_templates) where templates will be placed
-bosh_template_folder: "pcf_templates"
+bosh_template_folder: ((bosh_template_folder)) #e.g. "pcf_templates"
 # vSphere datacenter folder (such as pcf_vms) where VMs will be placed
-bosh_vm_folder: "pcf_vms"
+bosh_vm_folder: ((bosh_vm_folder)) # e.g. "pcf_vms"
 
 # For credhub integration, replace dummy values in the following structure
 # and set the number of credhub instances in resource config to 2
 credhub_encryption_keys: |
   - name: cred-hub-slot1-key1
     key:
-      secret: thequickbrownfoxjumpsoverthelazydog
+      secret: ((credhub_encryption_key_1))
     primary: true
   - name: cred-hub-slot1-key2
     key:
-      secret: thefiveboxingwizardsjumpquickly
+      secret: ((thefiveboxingwizardsjumpquickly))
 
 # Infrastructure Configuration
 infra_network_name: "INFRASTRUCTURE"
@@ -139,11 +134,10 @@ enable_vm_resurrector: true
 
 icmp_checks_enabled: false
 max_threads: 8
+
 #nsx configuration
 nsx_address:                      # address of nsx
 nsx_ca_certificate:               # cert for nsx
 nsx_networking_enabled: false     # (true|false) to use nsx networking feature
 nsx_password:                     # password for nsx access
 nsx_username:                     # username for nsx access
-
-company_proxy_domain:
