@@ -53,9 +53,9 @@ properties: |
   .properties.plan1_selector:
     value: "Plan Active"
   .properties.plan1_selector.active.name:
-    value: "Small plan"  # the name that appears for end users to choose
+    value: "small"  # the name that appears for end users to choose
   .properties.plan1_selector.active.description:
-    value: "Plan 1 description"
+    value: "Small plan"
   .properties.plan1_selector.active.az_placement:
     value: AZ01  # Specify the AZ in which the cluster will be created
   .properties.plan1_selector.active.authorization_mode:
@@ -84,7 +84,7 @@ properties: |
   ### if plan 2 is to be activated, then uncomment and fill out the plan2 parameters below
   ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.plan2_selector.active.name:
-  #   value: "Medium plan"  # the name that appears for end users to choose
+  #   value: "medium"  # the name that appears for end users to choose
   # .properties.plan2_selector.active.description:
   #   value: "Plan 2 description"
   # .properties.plan2_selector.active.az_placement:
@@ -115,7 +115,7 @@ properties: |
   ### if plan 3 is to be activated, then uncomment and fill out the plan3 parameters below
   ### otherwise, leave this section commented out to avoid Ops Manager parameter settings errors
   # .properties.plan3_selector.active.name:
-  #   value: "Large plan"  # the name that appears for end users to choose
+  #   value: "large"  # the name that appears for end users to choose
   # .properties.plan3_selector.active.description:
   #   value: "Plan 3 description"
   # .properties.plan3_selector.active.az_placement:
