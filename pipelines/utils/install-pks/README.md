@@ -38,13 +38,13 @@ This approach allows for the `configure-tile` task of this pipeline to be generi
 
    This parameter file contains information about the PCF foundation (e.g. Ops Manager and Director) to which the tile will be deployed to.  
 
-   This parameters file is separate from the others for reuse purposes, since any other PCF tile install or upgrade pipeline will use the same properties. If you already have this type of file created for another PCF tile pipeline, you can reuse it here.
+   This parameters file is separate from the others for reuse purposes, since any other PCF tile install or upgrade pipeline will use the same properties. If you already have this type of file created for another PCF tile pipeline, you can reuse it here. See [`Appendix A`](#appendix-a---pcf-pipelines-parameter-files-tiers) section below for a sample diagram of this parameters files structure pattern.
 
 3) Update [`global_params.yml`](global_params.yml) by following the instructions in the file.  
 
   This parameter file contains information about global properties that typically apply to any PCF pipeline (e.g. Pivotal Network token).  
 
-  This parameters file is separate from the others for reuse purposes, since any other PCF tile install or upgrade pipeline will use the same properties. If you already have this type of file created for another PCF tile pipeline, you can reuse it here.
+  This parameters file is separate from the others for reuse purposes, since any other PCF tile install or upgrade pipeline will use the same properties. If you already have this type of file created for another PCF tile pipeline, you can reuse it here. See [`Appendix A`](#appendix-a---pcf-pipelines-parameter-files-tiers) section below for a sample diagram of this parameters files structure pattern.
 
 4) Create the pipeline in Concourse:  
 
@@ -69,3 +69,36 @@ For that step, the pipeline also provides a job to automate it: `create-pks-cli-
 ### Using PKS
 
 Once the PKS CLI client ID created, proceed with [creating K8s clusters with PKS](https://docs.pivotal.io/runtimes/pks/1-0/create-cluster.html) and [deploying K8s workloads with `kubectl`](https://docs.pivotal.io/runtimes/pks/1-0/deploy-workloads.html).
+
+
+---
+
+## Appendix A - PCF pipelines parameter files tiers
+
+```
+┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐   ┌ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ┐                               
+│                                           │   │                                           │                               
+         Pipelines for Foundation 1                      Pipelines for Foundation 2                                         
+│ ┌───────────┐ ┌───────────┐ ┌───────────┐ │   │ ┌───────────┐ ┌───────────┐ ┌───────────┐ │                               
+  │           │ │           │ │           │       │           │ │           │ │           │                                 
+│ │  ERT tile │ │Redis tile │ │MySQL tile │ │   │ │  ERT tile │ │Redis tile │ │MySQL tile │ │   1 params file per tile pipeline     
+  │   params  │ │   params  │ │   params  │       │   params  │ │   params  │ │   params  │                                 
+│ │           │ │           │ │           │ │   │ │           │ │           │ │           │ │                               
+  └───────────┘ └───────────┘ └───────────┘       └───────────┘ └───────────┘ └───────────┘                                 
+│ ┌───────────────────────────────────────┐ │   │ ┌───────────────────────────────────────┐ │                               
+  │                                       │       │                                       │                                 
+│ │        PCF foundation 1 params        │ │   │ │        PCF foundation 2 params        │ │   1 params file per foundation
+  │           e.g. OpsMgr info            │       │           e.g. OpsMgr info            │                                 
+│ │                                       │ │   │ │                                       │ │                               
+  │                                       │       │                                       │                                 
+│ └───────────────────────────────────────┘ │   │ └───────────────────────────────────────┘ │                               
+  ┌───────────────────────────────────────────────────────────────────────────────────────┐                                 
+│ │                                         │   │                                         │ │                               
+  │          Global parameters                                                            │       1 params file for all     
+│ │          e.g. PivNet token              │   │                                         │ │          foundations          
+  │                                                                                       │                                 
+│ │                                         │   │                                         │ │                               
+  └───────────────────────────────────────────────────────────────────────────────────────┘                                 
+│                                           │   │                                           │                               
+ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─     ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─                                
+```
