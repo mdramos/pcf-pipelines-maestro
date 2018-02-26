@@ -48,17 +48,13 @@ use_backend ${POOL_NAME} if host_${APPLICATION_NAME}
 EOF
 
   # create lb pool
-  cat <<- EOF > lbcommand
   pynsxvg lb add_pool -n $NSX_EDGE_GEN_NAME \
     --pool_name ${POOL_NAME} \
     --algorithm round-robin \
     --monitor default_tcp_monitor
-EOF
-  cat lbcommand
   # add members to pool
   for ip in ${POOL_IPS[@]}
   do
-    cat <<- EOF > addmembercommand
     pynsxvg lb add_member \
       -n $NSX_EDGE_GEN_NAME \
       --pool_name $POOL_NAME \
@@ -67,17 +63,13 @@ EOF
       --port ${APPLICATION_PORT_NUMBER} \
       --monitor_port ${APPLICATION_PORT_NUMBER} \
       --weight 1
-EOF
-    cat addmembercommand
   done
 
-  cat <<- EOF > add_lbrule
   pynsxvg lb add_rule \
     -n $NSX_EDGE_GEN_NAME \
     -rn "route-${APPLICATION_NAME}" \
     -rs "$(cat app_rule)"
-EOF
-  cat add_lbrule
+
   #TODO: modify pynsxv to allow to add a app rule to an existing virtual server
   # pynsxv_local lb modify_vip \
   #  -n $NSX_EDGE_GEN_NAME \
