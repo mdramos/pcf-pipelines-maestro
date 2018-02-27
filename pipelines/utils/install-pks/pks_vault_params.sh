@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set the path for the secrets below to be created in vault or credhub
-concourse_secrets_path="/concourse/c0-infra/install-pks"
+concourse_secrets_path="/concourse/my-team-name/my-pipeline-name"
 
 # VAULT or CREDHUB - targeted secrets management system
 targeted_system="VAULT"
@@ -65,9 +65,6 @@ secrets=(
   "nsxt_t0_routerid"::"nsxt_t0_routerid_goes_here"
   "nxst_ip_block_id"::"nxst_ip_block_id_goes_here"
   "nsxt_floating_ip_pool_id":"nsxt_floating_ip_pool_id_goes_here"
-
-  # pcf pks domain, e.g. pks.mydomain.com
-  "pcf_pks_domain"::"pks.domain.com"
 
 )
 

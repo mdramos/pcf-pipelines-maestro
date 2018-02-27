@@ -90,7 +90,7 @@ credhub_encryption_keys: |
     primary: true
   - name: cred-hub-slot1-key2
     key:
-      secret: ((thefiveboxingwizardsjumpquickly))
+      secret: ((credhub_encryption_key_2))
 
 # Infrastructure Configuration
 infra_network_name: "INFRASTRUCTURE"

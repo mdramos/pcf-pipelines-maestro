@@ -79,7 +79,7 @@ EOF
 }
 
 pynsxvg () {
-   pynsxv/pynsxv/cli.py "$@"
+   /opt/pynsxv/cli.py "$@"
 }
 
 getYamlPropertyValue() {

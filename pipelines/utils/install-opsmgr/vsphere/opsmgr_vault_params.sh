@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set the path for the secrets below to be created in vault or credhub
-concourse_secrets_path="/concourse/c0-infra"
+concourse_secrets_path="/concourse/my-team-name/my-pipeline-name"
 
 # VAULT or CREDHUB - targeted secrets management system
 targeted_system="VAULT"
@@ -156,6 +156,18 @@ do
     credhub set -n "${concourse_secrets_path}/${KEY}" -v "${VALUE}"
   fi
 done
+
+cat << EOF > om_ca.crt
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+EOF
+
+cat << EOF > vcenter_ca.crt
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+EOF
 
 certs=(
   # Optional PEM-encoded certificates to add to BOSH director
