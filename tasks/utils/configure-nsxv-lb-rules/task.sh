@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -eu
 
 # script expects to have access to a directory/filename called `nsxv-pool-data/pool_config.yml`
 # containing the following parameters:
