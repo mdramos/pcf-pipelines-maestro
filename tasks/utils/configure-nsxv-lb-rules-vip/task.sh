@@ -80,7 +80,7 @@ EOF
      --vip_ip $NSX_EDGE_GEN_VIP_IP  \
      --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
      --port $NSX_EDGE_GEN_VIP_PORT \
-     --rule_id ${RULE_NAME}
+     --rule_name ${RULE_NAME}
 
 }
 
