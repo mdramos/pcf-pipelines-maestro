@@ -40,7 +40,7 @@ jobs:
   plan:
   - get: pcf-pipelines-utils
     trigger: true
-    passed: [configure-lb-pks-uaa]
+    passed: [configure-lb-pks-application-profile]
   - task: prepare-pks-uaa-endpoint-config
     config:
       platform: linux
@@ -103,7 +103,7 @@ jobs:
       NSX_EDGE_GEN_VIP_PORT: 8443
       NSX_EDGE_GEN_PROFILE_NAME: PKS-HTTPS
       NSX_EDGE_GEN_PROFILE_PROTOCOL: HTTPS
-
+      NSX_EDGE_GEN_ADD_RULE_TO_VIP: true
 - name: configure-lb-pks-api
   plan:
   - get: pcf-pipelines-utils
@@ -172,3 +172,4 @@ jobs:
       NSX_EDGE_GEN_VIP_PORT: 9021
       NSX_EDGE_GEN_PROFILE_NAME: PKS-HTTPS
       NSX_EDGE_GEN_PROFILE_PROTOCOL: HTTPS
+      NSX_EDGE_GEN_ADD_RULE_TO_VIP: false

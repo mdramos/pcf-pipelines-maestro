@@ -71,20 +71,22 @@ EOF
     -rn ${RULE_NAME} \
     -rs "$(cat app_rule)"
 
-   # create lb vip and add rules to it
-   pynsxvg lb add_vip \
-     -n $NSX_EDGE_GEN_NAME \
-     --vip_name $NSX_EDGE_GEN_VIP_NAME \
-     --pool_name $POOL_NAME \
-     --profile_name $NSX_EDGE_GEN_PROFILE_NAME \
-     --vip_ip $NSX_EDGE_GEN_VIP_IP  \
-     --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
-     --port $NSX_EDGE_GEN_VIP_PORT
+  # create lb vip and add rules to it
+  pynsxvg lb add_vip \
+   -n $NSX_EDGE_GEN_NAME \
+   --vip_name $NSX_EDGE_GEN_VIP_NAME \
+   --pool_name $POOL_NAME \
+   --profile_name $NSX_EDGE_GEN_PROFILE_NAME \
+   --vip_ip $NSX_EDGE_GEN_VIP_IP  \
+   --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
+   --port $NSX_EDGE_GEN_VIP_PORT
 
-   pynsxvg lb add_rule_to_vip \
-    -n $NSX_EDGE_GEN_NAME \
-    --vip_name "$NSX_EDGE_GEN_VIP_NAME" \
-    --rule_name ${RULE_NAME}
+  if [[ "$NSX_EDGE_GEN_ADD_RULE_TO_VIP" == "true" ]]; then
+    pynsxvg lb add_rule_to_vip \
+     -n $NSX_EDGE_GEN_NAME \
+     --vip_name "$NSX_EDGE_GEN_VIP_NAME" \
+     --rule_name ${RULE_NAME}
+  fi
 
 }
 
