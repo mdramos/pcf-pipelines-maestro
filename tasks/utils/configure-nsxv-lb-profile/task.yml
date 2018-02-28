@@ -10,7 +10,7 @@ inputs:
 - name: pcf-pipelines-utils
 
 run:
-  path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules/task.sh
+  path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-profile/task.sh
 
 params:
   VCENTER_HOST:

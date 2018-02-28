@@ -11,7 +11,7 @@ inputs:
 - name: nsxv-pool-data
 
 run:
-  path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-profile/task.sh
+  path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules-vip/task.sh
 
 params:
   VCENTER_HOST:

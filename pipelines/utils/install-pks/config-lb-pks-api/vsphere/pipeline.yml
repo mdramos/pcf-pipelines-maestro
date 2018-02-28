@@ -71,9 +71,14 @@ jobs:
       NSX_EDGE_GEN_NSX_MANAGER_ADMIN_USER: ((nsxv_manager_admin_username))
       NSX_EDGE_GEN_NSX_MANAGER_ADMIN_PASSWD: ((nsxv_manager_admin_password))
       NSX_EDGE_GEN_NSX_MANAGER_TRANSPORT_ZONE: ((nsxv_gen_mgr_transport_zone))
-      NSX_EDGE_GEN_NAME: ((nsxv_gen_edge_name))
       NSX_EDGE_GEN_EDGE_CLUSTER: ((nsxv_gen_edge_cluster))
       NSX_EDGE_GEN_EDGE_DATASTORE: ((vcenter_datastore))
+      NSX_EDGE_GEN_NAME: ((nsxv_gen_edge_name))
+      NSX_EDGE_GEN_VIP_IP: ((nsxv_gen_vip_ip))
+      NSX_EDGE_GEN_VIP_NAME: PKS-UAA
+      NSX_EDGE_GEN_VIP_PORT: 8443
+      NSX_EDGE_GEN_PROFILE_NAME: PKS-HTTPS
+      NSX_EDGE_GEN_PROFILE_PROTOCOL: HTTPS
 
 - name: configure-lb-pks-api
   plan:
@@ -135,6 +140,11 @@ jobs:
       NSX_EDGE_GEN_NSX_MANAGER_ADMIN_USER: ((nsxv_manager_admin_username))
       NSX_EDGE_GEN_NSX_MANAGER_ADMIN_PASSWD: ((nsxv_manager_admin_password))
       NSX_EDGE_GEN_NSX_MANAGER_TRANSPORT_ZONE: ((nsxv_gen_mgr_transport_zone))
-      NSX_EDGE_GEN_NAME: ((nsxv_gen_edge_name))
       NSX_EDGE_GEN_EDGE_CLUSTER: ((nsxv_gen_edge_cluster))
       NSX_EDGE_GEN_EDGE_DATASTORE: ((vcenter_datastore))
+      NSX_EDGE_GEN_NAME: ((nsxv_gen_edge_name))
+      NSX_EDGE_GEN_VIP_IP: ((nsxv_gen_vip_ip))
+      NSX_EDGE_GEN_VIP_NAME: PKS-API
+      NSX_EDGE_GEN_VIP_PORT: 8443
+      NSX_EDGE_GEN_PROFILE_NAME: PKS-HTTPS
+      NSX_EDGE_GEN_PROFILE_PROTOCOL: HTTPS

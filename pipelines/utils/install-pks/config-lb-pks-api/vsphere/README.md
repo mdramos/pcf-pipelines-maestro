@@ -11,9 +11,13 @@ It requires a Concourse server with credentials management integration setup (ei
 - Create an `Application Profile`:   
   Name: PKS-HTTPS  
   Type: HTTPS  
-  Select option "Insert X-Forwarded-For HTTP header"  
-  Select option "Enable Pool Side SSL"  
-  Select "Configure Server Certificate" and select appropriate cert for `pks` sub-domain   
+  Either:   
+    Set "Enable SSL Passthrough"  
+  Or:    
+     Leave "Enable SSL Passthrough" disabled and  
+     Select option "Insert X-Forwarded-For HTTP header"  
+     Select option "Enable Pool Side SSL"  
+     Select "Configure Server Certificate" and select appropriate cert for `pks` sub-domain   
 
 - Create a Virtual Server for PKS-UAA  
   Application Profile: PKS-HTTPS   
@@ -21,7 +25,7 @@ It requires a Concourse server with credentials management integration setup (ei
   IP Address: <VIP for PKS API>  
   Protocol: HTTPS  
   Port: 8443  
-  Default protocol: pks-uaa  
+  Default pool: pks-uaa  
 
 - Create a Virtual Server for PKS-API  
   Application Profile: PKS-HTTPS   
@@ -29,7 +33,7 @@ It requires a Concourse server with credentials management integration setup (ei
   IP Address: <VIP for PKS API - same as above for PKS-UAA>  
   Protocol: HTTPS  
   Port: 9021  
-  Default protocol: pks-api  
+  Default pool: pks-api  
 
 
 ## How to use this pipeline

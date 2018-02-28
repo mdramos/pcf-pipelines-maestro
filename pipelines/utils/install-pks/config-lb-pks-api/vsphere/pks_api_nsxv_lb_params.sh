@@ -5,6 +5,7 @@ concourse_secrets_path="/concourse/team-name/pks-api-config-nsxv"
 
 # VAULT or CREDHUB - targeted secrets management system
 targeted_system="VAULT"
+action="CREATE"   ## CREATE or DELETE
 
 # This script assumes that:
 # 1) the credhub or vault CLI is installed
@@ -54,6 +55,7 @@ secrets=(
   "nsxv_gen_edge_name"::"nsxv_gen_edge_name"
   "nsxv_gen_edge_cluster"::"Cluster-A"
   "nsxv_gen_mgr_transport_zone"::"nsxv_gen_mgr_transport_zone"
+  "nsxv_gen_vip_ip"::"nsxv_gen_vip_ip"
 
 )
 
@@ -61,9 +63,13 @@ for i in "${secrets[@]}"
 do
   KEY="${i%%::*}"
   VALUE="${i##*::}"
-  echo "Creating secret for [$KEY]"
+  echo "Processing secret for [$KEY]"
   if [[ $targeted_system == "VAULT" ]]; then
-    vault write "${concourse_secrets_path}/${KEY}" value="${VALUE}"
+    if [[ $action == "DELETE" ]]; then
+      vault delete "${concourse_secrets_path}/${KEY}"
+    else
+      vault write "${concourse_secrets_path}/${KEY}" value="${VALUE}"
+    fi
   else   # CREDHUB
     credhub set -n "${concourse_secrets_path}/${KEY}" -v "${VALUE}"
   fi
