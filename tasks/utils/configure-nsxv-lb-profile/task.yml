@@ -8,7 +8,6 @@ image_resource:
 
 inputs:
 - name: pcf-pipelines-utils
-- name: nsxv-pool-data
 
 run:
   path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules/task.sh
@@ -23,7 +22,9 @@ params:
   NSX_EDGE_GEN_NSX_MANAGER_ADMIN_USER:
   NSX_EDGE_GEN_NSX_MANAGER_ADMIN_PASSWD:
   NSX_EDGE_GEN_NSX_MANAGER_TRANSPORT_ZONE:
+
   NSX_EDGE_GEN_NAME:
-  NSX_EDGE_GEN_VIP_NAME:
+  NSX_EDGE_GEN_PROFILE_NAME:
   NSX_EDGE_GEN_EDGE_CLUSTER:
   NSX_EDGE_GEN_EDGE_DATASTORE:
+  NSX_EDGE_GEN_PROFILE_PROTOCOL:

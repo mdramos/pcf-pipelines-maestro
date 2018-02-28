@@ -11,7 +11,7 @@ inputs:
 - name: nsxv-pool-data
 
 run:
-  path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules/task.sh
+  path: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-profile/task.sh
 
 params:
   VCENTER_HOST:
@@ -23,7 +23,12 @@ params:
   NSX_EDGE_GEN_NSX_MANAGER_ADMIN_USER:
   NSX_EDGE_GEN_NSX_MANAGER_ADMIN_PASSWD:
   NSX_EDGE_GEN_NSX_MANAGER_TRANSPORT_ZONE:
+
   NSX_EDGE_GEN_NAME:
   NSX_EDGE_GEN_VIP_NAME:
+  NSX_EDGE_GEN_VIP_IP:
+  NSX_EDGE_GEN_VIP_PORT:
+  NSX_EDGE_GEN_PROFILE_NAME:
+  NSX_EDGE_GEN_PROFILE_PROTOCOL:
   NSX_EDGE_GEN_EDGE_CLUSTER:
   NSX_EDGE_GEN_EDGE_DATASTORE:

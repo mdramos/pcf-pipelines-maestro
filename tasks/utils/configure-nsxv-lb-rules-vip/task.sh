@@ -39,7 +39,7 @@ vcenter_passwd = $VCENTER_PWD
 [defaults]
 transport_zone = $NSX_EDGE_GEN_NSX_MANAGER_TRANSPORT_ZONE
 datacenter_name = $VCENTER_DATA_CENTER
-edge_datastore =  $NSX_EDGE_GEN_EDGE_DATASTORE
+edge_datastore = $NSX_EDGE_GEN_EDGE_DATASTORE
 edge_cluster = $NSX_EDGE_GEN_EDGE_CLUSTER
 EOF
 
@@ -71,10 +71,16 @@ EOF
     -rn ${RULE_NAME} \
     -rs "$(cat app_rule)"
 
-  pynsxvg lb add_rule_to_vip \
-   -n $NSX_EDGE_GEN_NAME \
-   --vip_name "$NSX_EDGE_GEN_VIP_NAME" \
-   --rule_name ${RULE_NAME}
+   # create lb vip and add rules to it
+   pynsxv_local lb add_vip \
+     -n $NSX_EDGE_GEN_NAME \
+     --vip_name $NSX_EDGE_GEN_VIP_NAME \
+     --pool_name $POOL_NAME \
+     --profile_name $NSX_EDGE_GEN_PROFILE_NAME \
+     --vip_ip $NSX_EDGE_GEN_VIP_IP  \
+     --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
+     --port $NSX_EDGE_GEN_VIP_PORT \
+     --rule_id ${RULE_NAME}
 
 }
 
