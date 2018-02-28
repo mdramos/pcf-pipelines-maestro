@@ -24,8 +24,8 @@ EOF
     -n $NSX_EDGE_GEN_NAME \
     --profile_name $NSX_EDGE_GEN_PROFILE_NAME \
     --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
-    -x true
-    # -cert "$NSX_EDGE_GEN_PROFILE_CERT"
+    -x $NSX_EDGE_GEN_X_FORWARDED_FOR \
+    --ssl_passthrough $NSX_EDGE_GEN_SSL_PASSTHROUGH
 
 }
 

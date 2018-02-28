@@ -13,10 +13,34 @@ resource_types:
     tag: latest-final
 
 jobs:
+- name: configure-lb-pks-application-profile
+  plan:
+  - get: pcf-pipelines-utils
+  - task: configure-nsxv-lb-app-profile
+    file: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-profile/task.yml
+    params:
+      VCENTER_HOST: ((vcenter_host))
+      VCENTER_USR: ((vcenter_usr))
+      VCENTER_PWD: ((vcenter_pwd))
+      VCENTER_DATA_CENTER: ((vcenter_datacenter))
+      NSX_EDGE_GEN_NSX_MANAGER_ADDRESS: ((nsxv_manager_address))
+      NSX_EDGE_GEN_NSX_MANAGER_ADMIN_USER: ((nsxv_manager_admin_username))
+      NSX_EDGE_GEN_NSX_MANAGER_ADMIN_PASSWD: ((nsxv_manager_admin_password))
+      NSX_EDGE_GEN_NSX_MANAGER_TRANSPORT_ZONE: ((nsxv_gen_mgr_transport_zone))
+      NSX_EDGE_GEN_EDGE_CLUSTER: ((nsxv_gen_edge_cluster))
+      NSX_EDGE_GEN_EDGE_DATASTORE: ((vcenter_datastore))
+      NSX_EDGE_GEN_NAME: ((nsxv_gen_edge_name))
+      NSX_EDGE_GEN_VIP_IP: ((nsxv_gen_vip_ip))
+      NSX_EDGE_GEN_PROFILE_NAME: PKS-HTTPS
+      NSX_EDGE_GEN_PROFILE_PROTOCOL: HTTPS
+      NSX_EDGE_GEN_SSL_PASSTHROUGH: true
+      NSX_EDGE_GEN_X_FORWARDED_FOR: false
+
 - name: configure-lb-pks-uaa
   plan:
   - get: pcf-pipelines-utils
-
+    trigger: true
+    passed: [configure-lb-pks-uaa]
   - task: prepare-pks-uaa-endpoint-config
     config:
       platform: linux
@@ -145,6 +169,6 @@ jobs:
       NSX_EDGE_GEN_NAME: ((nsxv_gen_edge_name))
       NSX_EDGE_GEN_VIP_IP: ((nsxv_gen_vip_ip))
       NSX_EDGE_GEN_VIP_NAME: PKS-API
-      NSX_EDGE_GEN_VIP_PORT: 8443
+      NSX_EDGE_GEN_VIP_PORT: 9021
       NSX_EDGE_GEN_PROFILE_NAME: PKS-HTTPS
       NSX_EDGE_GEN_PROFILE_PROTOCOL: HTTPS

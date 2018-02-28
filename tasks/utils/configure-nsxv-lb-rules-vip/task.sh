@@ -79,8 +79,12 @@ EOF
      --profile_name $NSX_EDGE_GEN_PROFILE_NAME \
      --vip_ip $NSX_EDGE_GEN_VIP_IP  \
      --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
-     --port $NSX_EDGE_GEN_VIP_PORT \
-     --rule_name ${RULE_NAME}
+     --port $NSX_EDGE_GEN_VIP_PORT
+
+   pynsxvg lb add_rule_to_vip \
+    -n $NSX_EDGE_GEN_NAME \
+    --vip_name "$NSX_EDGE_GEN_VIP_NAME" \
+    --rule_name ${RULE_NAME}
 
 }
 
