@@ -60,8 +60,8 @@ jobs:
       OPSMAN_CLIENT_ID: ((opsman_client_id))
       OPSMAN_CLIENT_SECRET: ((opsman_client_secret))
 
-  - task: configure-nsxv-lb-rules
-    file: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules/task.yml
+  - task: configure-nsxv-lb-rules-vip
+    file: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules-vip/task.yml
     params:
       VCENTER_HOST: ((vcenter_host))
       VCENTER_USR: ((vcenter_usr))
@@ -129,8 +129,8 @@ jobs:
       OPSMAN_CLIENT_ID: ((opsman_client_id))
       OPSMAN_CLIENT_SECRET: ((opsman_client_secret))
 
-  - task: configure-nsxv-lb-rules
-    file: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules/task.yml
+  - task: configure-nsxv-lb-rules-vip
+    file: pcf-pipelines-utils/tasks/utils/configure-nsxv-lb-rules-vip/task.yml
     params:
       VCENTER_HOST: ((vcenter_host))
       VCENTER_USR: ((vcenter_usr))

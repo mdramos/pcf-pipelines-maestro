@@ -72,7 +72,7 @@ EOF
     -rs "$(cat app_rule)"
 
    # create lb vip and add rules to it
-   pynsxv_local lb add_vip \
+   pynsxvg lb add_vip \
      -n $NSX_EDGE_GEN_NAME \
      --vip_name $NSX_EDGE_GEN_VIP_NAME \
      --pool_name $POOL_NAME \

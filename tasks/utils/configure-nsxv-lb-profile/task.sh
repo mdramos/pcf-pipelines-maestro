@@ -20,7 +20,7 @@ edge_cluster = $NSX_EDGE_GEN_EDGE_CLUSTER
 EOF
 
   # Create lb app profile if needed
-  pynsxv_local lb add_profile \
+  pynsxvg lb add_profile \
     -n $NSX_EDGE_GEN_NAME \
     --profile_name $NSX_EDGE_GEN_PROFILE_NAME \
     --protocol $NSX_EDGE_GEN_PROFILE_PROTOCOL \
