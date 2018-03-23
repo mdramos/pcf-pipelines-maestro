@@ -78,8 +78,12 @@ upgrade-pipelines-structure-style: multiple
 
 # *********** IaaS name for which stemcell to download ***********
 # See https://github.com/pivotal-cf/pcf-product-stemcell-downloader/
-# for the list of allowed IaaS names (e.g. aws|openstack|vcloud|vsphere|azure|google)
+# for the list of allowed IaaS names (e.g. aws|vsphere|azure|google)
 iaas_type: vsphere
+# Set to true to enable all errands, false to disable all or leave blank to keep states the same.
+# This is a global param for all tiles in a foundation in this Maestro release
+enable_errands:
+
 
 # ******** Credentials for Operations Manager - for both tiles and OpsMan pipelines ***********
 # These are used for uploading, staging and deploying product files on Operations Manager.
@@ -107,11 +111,16 @@ pivnet_poll_interval: 1h
 # *********** Parameters for Ops Manager Upgrade pipeline ***********
 # Uncomment the one section that matches this foundation's IaaS and update params
 # ******* For Google - GCP ******************************************
+# gcp_project_id: CHANGEME
+# gcp_zone: CHANGEME
+# gcp_service_account_key: CHANGEME
 # existing_opsman_vm_name: CHANGEME
 # opsman_gcp_project: CHANGEME
 # opsman_gcp_zone: CHANGEME
 # opsman_gcp_credfile_contents: ((opsman_gcp_credfile_contents))
 # pivnet_image_region: us
+# pcf_opsman_disk_size_in_gb:       # optional - Overwrite the existing VM disk size for Ops Manager
+
 # ******* For Azure ****************************************
 # azure_region: CHANGEME    # e.g. east_us
 # azure_subscription_id: ((azure_subscription_id))
@@ -123,12 +132,16 @@ pivnet_poll_interval: 1h
 # azure_storage_account_key: ((azure_storage_account_key))
 # azure_storage_container_name: CHANGEME
 # existing_opsman_vm_name: CHANGEME
+# pcf_opsman_disk_size_in_gb:       # optional - Overwrite the existing VM disk size for Ops Manager
+
 # ******* For AWS ******************************************
 # aws_access_key_id: ((aws_access_key_id))
 # aws_secret_access_key: ((aws_secret_access_key))
 # aws_region: ((aws_region))
 # aws_vpc_id: ((aws_vpc_id))
 # existing_opsman_vm_name: CHANGEME # Existing Ops Manager VM Name Pattern. This should uniquely filter to a running Ops Manager instance. eg.  myenv-OpsMan
+# pcf_opsman_disk_size_in_gb:       # optional - Overwrite the existing VM disk size for Ops Manager
+
 # ******* For VSPHERE **************************************
 vcenter_url: ((vcenter_url))                      # vCenter URL - exclude protocol. e.g. vcsa-01.haas.pivotal.io
 vcenter_username: ((vcenter_username))            # vCenter Username. e.g. administrator@vsphere.local
