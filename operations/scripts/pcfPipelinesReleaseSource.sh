@@ -6,7 +6,7 @@ processPcfPipelinesSourcePatch() {
   pcfPipelinesSource=$(grep "pcf-pipelines-source" $configFile | grep "^[^#;]" | cut -d ":" -f 2 | tr -d " ")
   # default patch file for "git" option
   patchFile="./operations/opsfiles/replace-pcf-pipelines-git-repo-uri.yml"
-  [ "${pcfPipelinesSource,,}" == "pivnet" ] && patchFile="../pcf-pipelines/operations/use-pivnet-release.yml";
+  # [ "${pcfPipelinesSource,,}" == "pivnet" ] && patchFile="../pcf-pipelines/operations/use-pivnet-release.yml";
 
   # pre-updates for multiple pipelines style
   preUpdatesForPcfPipelinesSourcePatch "$configFile" "$pcfPipelinesSource" "$patchFile"
@@ -15,13 +15,17 @@ processPcfPipelinesSourcePatch() {
   for iaasPipeline in ./globalPatchFiles/upgrade-ops-manager/*/pipeline.yml; do
       echo "Patching [$iaasPipeline]"
       cp $iaasPipeline ./upgrade-ops-manager-tmp.yml
-      cat ./upgrade-ops-manager-tmp.yml | yaml_patch_linux -o $patchFile > $iaasPipeline
+      if [[ "${pcfPipelinesSource,,}" != "pivnet" ]]; then
+        cat ./upgrade-ops-manager-tmp.yml | yaml_patch_linux -o $patchFile > $iaasPipeline
+      fi
   done
 
   echo "Applying pcf-pipelines source patch for [$pcfPipelinesSource] to upgrade-tiles pipelines files."
   cp ./globalPatchFiles/upgrade-tile/pipeline.yml ./upgrade-tile-tmp.yml
 
-  cat ./upgrade-tile-tmp.yml | yaml_patch_linux -o $patchFile > ./globalPatchFiles/upgrade-tile/pipeline.yml
+  if [[ "${pcfPipelinesSource,,}" != "pivnet" ]]; then
+     cat ./upgrade-tile-tmp.yml | yaml_patch_linux -o $patchFile > ./globalPatchFiles/upgrade-tile/pipeline.yml
+  fi
 
   # apply patch to files used for Single Pipeline style (one pipeline with all tiles)
   processPatchForSinglePipelineStyle  "$configFile" "$pcfPipelinesSource"

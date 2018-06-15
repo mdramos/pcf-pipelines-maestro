@@ -43,8 +43,13 @@ _For quick tests in development environments (with no need to fork Maestro repo)
 
 1. Commit and push the config files changes back to your *Maestro* git project repository.  
 
-1. Create the *Maestro* main pipeline in Concourse    
+1. Create the *Maestro* main pipeline in Concourse   
+   - When using `pcf-pipelines` from Pivotal Network (recommended):       
+   `fly -t <your-concourse-alias-for-main-team> sp -p pcf-pipelines-maestro -c ./pipelines/pcf-pipelines-maestro-pivnet.yml -l ./common/credentials.yml`  
+      
+   - When using `pcf-pipelines` from git:       
    `fly -t <your-concourse-alias-for-main-team> sp -p pcf-pipelines-maestro -c ./pipelines/pcf-pipelines-maestro.yml -l ./common/credentials.yml`  
+
 
 1. In the Concourse UI, un-pause and run the newly created `pcf-pipelines-maestro`.  
     Once un-paused, that pipeline should automatically be execute for the first time, in a minute or so, since it is automatically triggered by changes in your Maestro git repository. Regardless, feel free to execute job `orchestrate-pipelines` manually.  
