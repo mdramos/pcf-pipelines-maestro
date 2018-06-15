@@ -10,7 +10,12 @@ resources:
     api_token: {{pivnet_token}}
     product_slug: pcf-automation
     product_version: {{pcf-pipelines-release-or-tag}}
-resource_types: []
+resource_types:
+- name: pivnet
+  type: docker-image
+  source:
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
 jobs:
 - name: orchestrate-pipelines
   plan:
