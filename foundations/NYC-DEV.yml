@@ -15,9 +15,11 @@
 BoM_OpsManager_product_version: ^2\.0\..*$
 # ********************* PCF tiles upgrade *****
 BoM_tile_ERT_product_version: ^2\.0\..*$
+# BoM_tile_Healthwatch_product_version: ^1\.2\..*$
 # BoM_tile_SRT_product_version: ^2\.0\..*$
 # BoM_tile_IsolationSegment_product_version: ^2\.0\..*$
 # BoM_tile_PKS_product_version: ^1\.0\..*$
+# BoM_tile_MySQLv2_product_version: ^2\.3\..*$
 # BoM_tile_MySQL_product_version: ^1\.10\..*$
 # BoM_tile_RabbitMQ_product_version: ^1\.11\..*$
 # BoM_tile_Redis_product_version: ^1\.10\..*$
