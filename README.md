@@ -6,6 +6,10 @@ Maestro implements a framework to automate the creation of customized [pcf-pipel
 
 The framework consists of a main pipeline that has the ability to generate all desired PCF upgrade pipelines in Concourse (_a pipeline that generates pipelines_).
 
+> **CAUTION:** NOTE: This is a community project and Pivotal does not officially provide support for it.
+>> If you find anything broken, pull requests to help fix the problem are welcome.
+
+---
 
 ### How it works
 
@@ -46,7 +50,7 @@ _For quick tests in development environments (with no need to fork Maestro repo)
 1. Create the *Maestro* main pipeline in Concourse   
    - When using `pcf-pipelines` from Pivotal Network (recommended):       
    `fly -t <your-concourse-alias-for-main-team> sp -p pcf-pipelines-maestro -c ./pipelines/pcf-pipelines-maestro-pivnet.yml -l ./common/credentials.yml`  
-      
+
    - When using `pcf-pipelines` from git:       
    `fly -t <your-concourse-alias-for-main-team> sp -p pcf-pipelines-maestro -c ./pipelines/pcf-pipelines-maestro.yml -l ./common/credentials.yml`  
 
