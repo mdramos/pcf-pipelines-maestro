@@ -6,3 +6,4 @@
 #          a globs config "*offline*" needs to be added to the "get" for the corresponding
 #          resource entry in the buildpacks upgrade pipeline.
 java_buildpack_offline: "*offline*"
+java_buildpack: "*java-buildpack-v*"

@@ -30,28 +30,28 @@ BoM_tile_ERT_product_version: ^2\.0\..*$
 # BoM_tile_SCS_product_version: ^1\.5\..*$
 # BoM_tile_SplunkNozzle_product_version: ^0\.2\..*$
 # ********************* Buildpack upgrades - Candidate and Current Buildpack Versions ****
-# BoM_bp_go_buildpack_candidate: Go 1.8.1
-# BoM_bp_go_buildpack_current: Go 1.8.0
-# BoM_bp_java_buildpack_candidate: Java Buildpack 3.13
-# BoM_bp_java_buildpack_current: Java Buildpack 3.12
-# BoM_bp_java_buildpack_offline_candidate: Java Buildpack 3.13
-# BoM_bp_java_buildpack_offline_current: Java Buildpack 3.12
-# BoM_bp_binary_buildpack_candidate: Binary 1.0.12
-# BoM_bp_binary_buildpack_current: Binary 1.0.11
-# BoM_bp_dotnet_core_buildpack_candidate: .NET Core 1.0.16
-# BoM_bp_dotnet_core_buildpack_current: .NET Core 1.0.15
-# BoM_bp_nodejs_buildpack_candidate: NodeJS 1.5.34
-# BoM_bp_nodejs_buildpack_current: NodeJS 1.5.32
-# BoM_bp_php_buildpack_candidate: PHP 4.3.31
-# BoM_bp_php_buildpack_current: PHP 4.3.30
-# BoM_bp_python_buildpack_candidate: Python 1.5.18
-# BoM_bp_python_buildpack_current: Python 1.5.17
-# BoM_bp_ruby_buildpack_candidate: Ruby 1.6.37
-# BoM_bp_ruby_buildpack_current: Ruby 1.6.37
-# BoM_bp_staticfile_buildpack_candidate: StaticFile 1.4.6
-# BoM_bp_staticfile_buildpack_current: StaticFile 1.4.5
-# BoM_bp_tc_buildpack_candidate: tc Server Buildpack 3.16
-# BoM_bp_tc_buildpack_current: tc Server Buildpack 3.15
+# BoM_bp_go_buildpack_candidate: Go 1.8.25
+# BoM_bp_go_buildpack_current: Go 1.8.24
+# BoM_bp_java_buildpack_candidate: Java Buildpack 4.12
+# BoM_bp_java_buildpack_current: Java Buildpack 4.11
+# BoM_bp_java_buildpack_offline_candidate: Java Buildpack 4.12
+# BoM_bp_java_buildpack_offline_current: Java Buildpack 4.11
+# BoM_bp_binary_buildpack_candidate: Binary 1.0.21
+# BoM_bp_binary_buildpack_current: Binary 1.0.20
+# BoM_bp_dotnet_core_buildpack_candidate: .NET Core 2.1.3
+# BoM_bp_dotnet_core_buildpack_current: .NET Core 2.1.2
+# BoM_bp_nodejs_buildpack_candidate: NodeJS 1.6.28
+# BoM_bp_nodejs_buildpack_current: NodeJS 1.6.27
+# BoM_bp_php_buildpack_candidate: PHP 4.3.57
+# BoM_bp_php_buildpack_current: PHP 4.3.56
+# BoM_bp_python_buildpack_candidate: Python 1.6.19
+# BoM_bp_python_buildpack_current: Python 1.6.18
+# BoM_bp_ruby_buildpack_candidate: Ruby 1.7.21
+# BoM_bp_ruby_buildpack_current: Ruby 1.7.20
+# BoM_bp_staticfile_buildpack_candidate: Staticfile 1.4.29
+# BoM_bp_staticfile_buildpack_current: Staticfile 1.4.28
+# BoM_bp_tc_buildpack_candidate: tc Server Buildpack 4.12
+# BoM_bp_tc_buildpack_current: tc Server Buildpack 4.11
 # ********************* Stemcell upgrade - when an adhoc stemcell upgrade is required, as stemcell upgrades are automatically done along with Tiles upgrades ****
 # BoM_stemcell_version: 3445.51
 
