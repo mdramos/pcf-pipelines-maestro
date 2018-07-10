@@ -20,11 +20,7 @@ image_resource:
   source: {repository: czero/cflinuxfs2}
 
 inputs:
-  # - name: pcf-pipelines
-  # - name: stemcell-downloader
   - name: custom-pipeline-tasks
-  # - name: pivnet-product
-  - name: tool-om
   - name: stemcells
 
 params:

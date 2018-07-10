@@ -21,9 +21,7 @@ root=$PWD
 stemcell="$(ls -1 "${root}"/stemcells/*.tgz)"
 echo "Uploading Stemcell $stemcell"
 
-chmod +x ./tool-om/om-linux
-
-./tool-om/om-linux --target ${OPSMAN_URI} \
+om-linux --target ${OPSMAN_URI} \
   --skip-ssl-validation \
   --username "${OPSMAN_USERNAME}" \
   --password "${OPSMAN_PASSWORD}" \

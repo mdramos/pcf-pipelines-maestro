@@ -2,22 +2,22 @@ resource_types:
 - name: pivnet
   type: docker-image
   source:
-   repository: pivotalcf/pivnet-resource
-   tag: latest-final
+    repository: pivotalcf/pivnet-resource
+    tag: latest-final
 
 resources:
-- name: pcf-pipelines
-  type: git
+- name: pcf-pipelines-tarball
+  type: pivnet
   source:
-    uri: {{pcf_pipelines_project_url}}
-    branch: master
-    # private_key: {{git_private_key}}
+    api_token: {{pivnet_token}}
+    product_slug: pcf-automation
+    product_version: {{pcf-pipelines-release-or-tag}}
 
 - name: pcf-pipelines-maestro
   type: git
   source:
-   uri: {{maestro_project_url}}
-   private_key: {{git_maestro_private_key}}
+    uri: {{maestro_project_url}}
+    # private_key: {{git_maestro_private_key}}
 
 - name: stemcells
   type: pivnet
@@ -29,13 +29,10 @@ resources:
 jobs:
 - name: Get-and-Upload-Stemcell
   plan:
-  - get: pcf-pipelines
   - get: pcf-pipelines-maestro
   - get: stemcells
     params:
-      globs:
-      - "*((iaas_type))*"
-
+      globs: ["*((iaas_type))*"]
   - task: upload-stemcell
     file: pcf-pipelines-maestro/tasks/utils/upload-stemcell-version/task.yml
     input_mapping:
@@ -47,7 +44,24 @@ jobs:
 
 - name: Apply-Change
   plan:
-  - get: pcf-pipelines
+  - do:
+    - get: pcf-pipelines-tarball
+    - task: unpack-tarball
+      config:
+        platform: linux
+        image_resource:
+          type: docker-image
+          source:
+            repository: pcfnorm/rootfs
+        run:
+          path: bash
+          args:
+          - -c
+          - tar -xvf pcf-pipelines-tarball/*.tgz
+        inputs:
+        - name: pcf-pipelines-tarball
+        outputs:
+        - name: pcf-pipelines
   - get: pcf-pipelines-maestro
     passed:
     - Get-and-Upload-Stemcell

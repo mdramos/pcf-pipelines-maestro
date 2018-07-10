@@ -78,6 +78,6 @@ for foundation in ./foundations/*.yml; do
     echo "Processing buildpacks upgrade pipelines for [$foundation_name]"
     setBuildpacksUpgradePipelines "$foundation" "$foundation_name"
     # ***** Pipeline for Stemcell Adhoc Upgrade ***** (see ./tasks/maestro/scripts/stemcell.sh)
-    setStemcellAdhocUpgradePipeline "$foundation" "$foundation_name"
+    setStemcellAdhocUpgradePipeline "$foundation" "$foundation_name" "./common/credentials.yml"
 
 done
