@@ -7,4 +7,4 @@
 #          resource entry in the buildpacks upgrade pipeline.
 java_buildpack_offline: "*offline*"
 java_buildpack: "*java-buildpack-v*"
-tc_buildpack: "*java-buildpack-v*"
+tc_buildpack: "*tc-server-buildpack-v*"
