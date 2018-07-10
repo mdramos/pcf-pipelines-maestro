@@ -31,4 +31,4 @@ params:
   OPSMAN_URI:
 
 run:
-  path: custom-pipeline-tasks/ci/tasks/upload-stemcell-version/task.sh
+  path: custom-pipeline-tasks/tasks/utils/upload-stemcell-version/task.sh
